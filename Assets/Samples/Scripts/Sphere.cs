@@ -62,6 +62,18 @@ namespace Samples
             transform.localPosition = position;
             agent.goal = target.transform.localPosition.ToAVec();
         }
+
+        private void OnDrawGizmos()
+        {
+            if (!Application.isPlaying)
+            {
+                return;
+            }
+            Color c = Gizmos.color;
+            c.a = 0.5f;
+            Gizmos.color = c;
+            Gizmos.DrawLine(this.transform.position, target.transform.position);
+        }
     }
 
 }

@@ -24,7 +24,7 @@ namespace Samples
 
         [SerializeField]
         private Config OACconfig;
-        
+
         void Awake()
         {
             if(Instance != null)
@@ -33,7 +33,7 @@ namespace Samples
             }
 
             Instance = this;
-            
+
             simulator = new Simulator(OACconfig);
 
             for(int i = 0, len= mats.Length; i < len; ++i)
@@ -58,12 +58,12 @@ namespace Samples
 
         void CreateNew()
         {
-
+            Debug.Log("not implement");
         }
 
         void RemoveRandom()
         {
-
+            Debug.Log("not implement");
         }
 
 
