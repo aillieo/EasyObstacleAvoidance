@@ -6,8 +6,8 @@ The following images are showing the sample cases in this project:
 
 obstacle avoidance:
 
-![img](Screenshots/oa.png)
+![img](Screenshots/oa.gif)
 
 kd-tree:
 
-![img](Screenshots/kdtree.png)
+![img](Screenshots/kdtree.gif)
