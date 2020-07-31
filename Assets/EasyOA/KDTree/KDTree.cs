@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace AillieoUtils
@@ -91,13 +91,81 @@ namespace AillieoUtils
 
         private void FindBounds(out Vector2 min, out Vector2 max)
         {
-            // todo 效率优化
             min = managed[0].position;
             max = managed[0].position;
             foreach (var pp in managed)
             {
                 min = Vector2.Min(min, pp.position);
                 max = Vector2.Max(max, pp.position);
+            }
+
+
+            //
+            int count = managed.Count;
+            min = managed[0].position;
+            max = managed[0].position;
+
+            int pairs = (count - 1) / 2;
+            // 如果count是奇数 计算 [1] ~ [count-1]
+            // 如果count是偶数 先计算 [1] ~ [count-1-1]
+            for (int i = 0; i < pairs; ++i )
+            {
+                int i0 = i * 2 + 1;
+                int i1 = i * 2 + 2;
+                Vector2 pos0 = managed[i0].position;
+                Vector2 pos1 = managed[i1].position;
+
+                if (pos0.x > pos1.x)
+                {
+                    if (pos1.x < min.x)
+                        min.x = pos1.x;
+
+                    if (pos0.x > max.x)
+                        max.x = pos0.x;
+                }
+                else
+                {
+                    if (pos0.x < min.x)
+                        min.x = pos0.x;
+
+                    if (pos1.x > max.x)
+                        max.x = pos1.x;
+                }
+
+                if (pos0.y > pos1.y)
+                {
+                    if (pos1.y < min.y)
+                        min.y = pos1.y;
+
+                    if (pos0.y > max.y)
+                        max.y = pos0.y;
+                }
+                else
+                {
+                    if (pos0.y < min.y)
+                        min.y = pos0.y;
+
+                    if (pos1.y > max.y)
+                        max.y = pos1.y;
+                }
+            }
+
+            if(count - 1 > pairs * 2)
+            {
+                // count 是偶数 还差一个
+                int last = count - 1;
+                Vector2 posLast = managed[last].position;
+                if (min.x > posLast.x)
+                    min.x = posLast.x;
+
+                if (max.x < posLast.x)
+                    max.x = posLast.x;
+
+                if (min.y > posLast.y)
+                    min.y = posLast.y;
+
+                if (max.y < posLast.y)
+                    max.y = posLast.y;
             }
         }
 
